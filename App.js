@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
         {results ? (
           results.map(({ title, poster_path, genre_ids }) => (
             <View style={styles.row} key={title}>
@@ -69,7 +69,7 @@ export default function App() {
                     {genre_ids.map((genre_id) =>
                       genres
                         .filter(({ id }) => genre_id === id)
-                        .map(({ name }) => <Text>{name}</Text>)
+                        .map(({ name }) => <Text key={name}>{name}</Text>)
                     )}
                   </View>
                 )}
@@ -95,19 +95,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginBottom: 25,
-  },
-  scrollView: {
-    // marginHorizontal: 20,
+    marginHorizontal: 20,
   },
   content: {
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   genres: {
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   film: {
     padding: 30,
