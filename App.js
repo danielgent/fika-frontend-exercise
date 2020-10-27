@@ -10,6 +10,10 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 
+const SCALE = 4;
+const THUMBNAIL_WIDTH = 500 / SCALE;
+const THUMBNAIL_HEIGHT = 750 / SCALE;
+
 export default function App() {
   const [results, setResults] = React.useState(null);
 
@@ -31,13 +35,16 @@ export default function App() {
         {results ? (
           results.map(({ title, poster_path }) => (
             <View style={styles.row} key={title}>
-              <Text style={styles.film}>{title}</Text>
               <Image
                 source={{
                   uri: `http://image.tmdb.org/t/p/w500/${poster_path}`,
                 }}
-                style={{ width: 40, height: 40 }}
+                style={{
+                  width: THUMBNAIL_WIDTH,
+                  height: THUMBNAIL_HEIGHT,
+                }}
               />
+              <Text style={styles.film}>{title}</Text>
             </View>
           ))
         ) : (
@@ -54,7 +61,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
   },
-  row: {},
+  row: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    marginBottom: 25,
+  },
   scrollView: {
     // marginHorizontal: 20,
   },
