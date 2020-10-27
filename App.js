@@ -62,16 +62,16 @@ export default function App() {
                   height: THUMBNAIL_HEIGHT,
                 }}
               />
-              <View>
+              <View style={styles.content}>
                 <Text style={styles.film}>{title}</Text>
                 {genres && (
-                  <Text>
+                  <View style={styles.genres}>
                     {genre_ids.map((genre_id) =>
                       genres
                         .filter(({ id }) => genre_id === id)
-                        .map(({ name }) => name)
+                        .map(({ name }) => <Text>{name}</Text>)
                     )}
-                  </Text>
+                  </View>
                 )}
               </View>
             </View>
@@ -98,6 +98,16 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     // marginHorizontal: 20,
+  },
+  content: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  genres: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   film: {
     padding: 30,
