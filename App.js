@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, ScrollView, SafeAreaView } from "react-native";
+import Constants from "expo-constants";
 
 export default function App() {
   const [results, setResults] = React.useState(null);
@@ -18,20 +19,33 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      {results?.map(({ title }) => (
-        <Text key={title}>{title}</Text>
-      ))}
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {results ? (
+          results.map(({ title }) => (
+            <Text style={styles.film} key={title}>
+              {title}
+            </Text>
+          ))
+        ) : (
+          <Text>Loading...</Text>
+        )}
+        <StatusBar style="auto" />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: Constants.statusBarHeight,
+  },
+  scrollView: {
+    // marginHorizontal: 20,
+  },
+  film: {
+    padding: 30,
+    width: "100%",
   },
 });
