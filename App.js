@@ -1,3 +1,9 @@
+/*
+TODO
+1.  break up into components
+2. fetching handlers services?
+3. drill down into view? have this as list. some navigation
+*/
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
@@ -16,9 +22,10 @@ const THUMBNAIL_HEIGHT = 750 / SCALE;
 
 export default function App() {
   const [results, setResults] = React.useState(null);
+  const [genres, setGenres] = React.useState(null);
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchResults = async () => {
       const response = await fetch(
         "https://api.themoviedb.org/3/movie/now_playing?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1"
       );
@@ -26,14 +33,25 @@ export default function App() {
 
       setResults(res.results);
     };
-    fetchData();
+
+    const fetchGenres = async () => {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/genre/movie/list?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US"
+      );
+      const res = await response.json();
+
+      setGenres(res.genres);
+    };
+
+    fetchResults();
+    fetchGenres();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {results ? (
-          results.map(({ title, poster_path }) => (
+          results.map(({ title, poster_path, genre_ids }) => (
             <View style={styles.row} key={title}>
               <Image
                 source={{
@@ -44,7 +62,18 @@ export default function App() {
                   height: THUMBNAIL_HEIGHT,
                 }}
               />
-              <Text style={styles.film}>{title}</Text>
+              <View>
+                <Text style={styles.film}>{title}</Text>
+                {genres && (
+                  <Text>
+                    {genre_ids.map((genre_id) =>
+                      genres
+                        .filter(({ id }) => genre_id === id)
+                        .map(({ name }) => name)
+                    )}
+                  </Text>
+                )}
+              </View>
             </View>
           ))
         ) : (
