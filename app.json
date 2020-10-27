@@ -1,0 +1,12 @@
+{
+  "name": "fika",
+  "displayName": "fika",
+  "expo": {
+    "name": "fika",
+    "slug": "fika",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
