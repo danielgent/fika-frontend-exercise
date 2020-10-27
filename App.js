@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, ScrollView, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  View,
+  Image,
+} from "react-native";
 import Constants from "expo-constants";
 
 export default function App() {
@@ -22,10 +29,16 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {results ? (
-          results.map(({ title }) => (
-            <Text style={styles.film} key={title}>
-              {title}
-            </Text>
+          results.map(({ title, poster_path }) => (
+            <View style={styles.row} key={title}>
+              <Text style={styles.film}>{title}</Text>
+              <Image
+                source={{
+                  uri: `http://image.tmdb.org/t/p/w500/${poster_path}`,
+                }}
+                style={{ width: 40, height: 40 }}
+              />
+            </View>
           ))
         ) : (
           <Text>Loading...</Text>
@@ -41,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
   },
+  row: {},
   scrollView: {
     // marginHorizontal: 20,
   },
