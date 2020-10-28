@@ -14,10 +14,7 @@ const FilmItem = ({ title, genres, genreIds, posterPath }) => (
       source={{
         uri: `http://image.tmdb.org/t/p/w500/${posterPath}`,
       }}
-      style={{
-        width: THUMBNAIL_WIDTH,
-        height: THUMBNAIL_HEIGHT,
-      }}
+      style={styles.coverImage}
     />
     <View style={styles.content}>
       <Text style={styles.film}>{title}</Text>
@@ -30,20 +27,22 @@ FilmItem.propTypes = {};
 
 const styles = StyleSheet.create({
   row: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     flexDirection: "row",
     marginBottom: 25,
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
   },
   content: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     flexDirection: "column",
   },
-  film: {
-    padding: 30,
-    width: "100%",
+  film: {},
+  coverImage: {
+    width: THUMBNAIL_WIDTH,
+    height: THUMBNAIL_HEIGHT,
+    marginRight: 20,
   },
 });
 
