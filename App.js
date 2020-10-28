@@ -7,11 +7,12 @@ TODO
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
-  StyleSheet, Text, ScrollView, SafeAreaView,
+  StyleSheet, ScrollView, SafeAreaView,
 } from "react-native";
 import Constants from "expo-constants";
 
 import FilmItem from "./components/FilmItem";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 export default function App() {
   const [results, setResults] = React.useState(null);
@@ -42,8 +43,10 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {results ? (
+      {results ? (
+        <ScrollView>
+          {
+
           // TODO - map these in API methods
           results.map(
             ({ title, poster_path: posterPath, genre_ids: genreIds }) => (
@@ -56,11 +59,12 @@ export default function App() {
               />
             ),
           )
-        ) : (
-          <Text>Loading...</Text>
-        )}
-        <StatusBar style="auto" />
-      </ScrollView>
+        }
+        </ScrollView>
+      ) : (
+        <LoadingSpinner />
+      )}
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
@@ -68,6 +72,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: Constants.statusBarHeight,
   },
 });

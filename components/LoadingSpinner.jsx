@@ -1,7 +1,18 @@
 import React from "react";
-import { Text } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 
-// TODO - make this an actual spinner
-const LoadingSpinner = () => <Text>Loading...</Text>;
+const LoadingSpinner = () => (
+  <View style={[styles.container, styles.horizontal]}>
+    <ActivityIndicator size="large" />
+  </View>
+);
 
 export default LoadingSpinner;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
