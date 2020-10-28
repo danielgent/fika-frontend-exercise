@@ -1,9 +1,3 @@
-/*
-TODO
-1.  break up into components
-2. fetching handlers services?
-3. drill down into view? have this as list. some navigation
-*/
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
