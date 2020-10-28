@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flexDirection: "column",
   },
-  film: {},
+  film: {
+    flex: 1,
+    flexWrap: "wrap",
+  },
   coverImage: {
     width: THUMBNAIL_WIDTH,
     height: THUMBNAIL_HEIGHT,
